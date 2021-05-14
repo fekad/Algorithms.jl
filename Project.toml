@@ -1,0 +1,8 @@
+name = "Algorithms"
+uuid = "2cb62861-3924-49a7-80a6-9c529247d19e"
+authors = ["Adam Fekete <adam@fekete.co.uk>"]
+version = "0.1.0"
+
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+LiveServer = "16fef848-5104-11e9-1b77-fb7a48bbb589"
