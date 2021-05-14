@@ -14,4 +14,5 @@ makedocs(
 
 deploydocs(;
     repo="github.com/fekad/Algorithms.jl",
+    devbranch = "main"
 )
