@@ -1,4 +1,3 @@
-
 # Lorentz modes: Driven harmonic oscillators with dampening
 
 Driven harmonic oscillators are damped oscillators further affected by an externally applied sinusoidal driving force:
@@ -6,12 +5,12 @@ Driven harmonic oscillators are damped oscillators further affected by an extern
 \ddot{x}(t) + \gamma \dot{x}(t)  + \omega_0^2 x(t) = A_0 e^{-i \omega t}
 ```
 where
-- $A_0$ is the driving amplitude,
-- $\omega$ is the driving frequency,
-- $\omega_{0}$ is the undamped angular frequency,
-- $\gamma$ is the damping ratio
+- ``A_0`` is the driving amplitude,
+- ``\omega`` is the driving frequency,
+- ``\omega_{0}`` is the undamped angular frequency,
+- ``\gamma`` is the damping ratio
 
-Lest suppose that the solution exist in the following form ($\gamma > 0$):
+Lest suppose that the solution exist in the following form (``\gamma > 0``):
 
 ```math
 x(t) = x_0 e^{-i \omega_0 t} e^{-\gamma t}
@@ -28,20 +27,23 @@ Total dielectric function:
 ```
 Note: Drude model is a special case of the Lotenz term with $A_0 = \omega_p^2$ and $\omega_0 = 0$
 
-```julia
+
+```@example 1
+using Plots
+gr()
+
 Loretnz(omega, A_0, omega_0, gamma) =  A_0 / (omega_0^2 - omega^2 - im * gamma * omega)
 x(t, x_0, omega_0, gamma) = x_0 * exp(-im * omega_0 * t)* exp(-gamma * t)
 ```
 
-```julia
+```@example 1
 omega = 0:.01:10
 
 A_0, omega_0 = 10, 4
 gamma = [0 .25 .5 1. 2]
 
 eps_lorentz = @. Loretnz(omega, A_0, omega_0, gamma)
-gr()
-# plot(omega, [real(eps_lorentz) imag(eps_lorentz)], label=["Re(ε(ω))", "Im(ε(ω))"], layout=(2,1))
+
 plot(
     plot(omega, real(eps_lorentz),label=["γ = $g" for g in gamma], ylims=[-6, 6]),
     plot(omega, imag(eps_lorentz), label=["γ = $g" for g in gamma]),
@@ -49,15 +51,14 @@ plot(
 )
 ```
 
-```julia
+```@example 1
 t = 0:0.01:10
-plotlyjs()
+
 x_0, omega_0 = 1, 1
 gamma = [0 .25 .5 1. 2]
 
 X = @. x(t, x_0, omega_0, gamma )
 plot(t, real(X))
-
 ```
 
 
@@ -109,13 +110,7 @@ f(x; x_0,\gamma)= { 1 \over 2 \pi } \left[ { \frac{\gamma}{|x-x_0|^2 +\gamma^2 }
 \varphi(\xi; x_0, \gamma) =  e^{i x_0 \xi} \cdot e^{- \gamma | \xi |}
 ```
 
-```julia
-using Plots
-# plotlyjs()
-gr()
-```
-
-```julia
+```@example 1
 Lorentzian(x, x₀, γ) = 1 / 2π * γ / ((x- x₀)^2 + γ^2)
 
 x₀, γ = 6, .5
@@ -123,7 +118,7 @@ X = LinRange(0,10,1001)
 plot(X, Lorentzian.(X, x₀, γ))
 ```
 
-```julia
+```@example 1
 phi(ξ, x₀, γ) = exp(- im * x₀ * ξ) * exp(-γ * abs(ξ))
 
 Ξ = LinRange(-2π, 2π, 1001)
@@ -132,12 +127,11 @@ plot(Ξ, real(r), imag(r), xlabel="ω", ylabel="Re", zlabel="Im")
 ```
 
 
-```julia
+```@example 1
 plot(
     plot(Ξ, abs.(r), label="abs"),
-    plot!(Ξ, angle.(r), label="angle"),
-    layout=(2,1),
-    size=(800,400)
+    plot(Ξ, angle.(r), label="angle"),
+    layout=(2,1)
 )
 ```
 

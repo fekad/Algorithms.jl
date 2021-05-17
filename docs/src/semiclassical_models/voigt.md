@@ -51,9 +51,14 @@ V(x;\sigma,\gamma) = \frac{\renewcommand\Re{\operatorname{Re}}\Re{[w(z)]}}{\sigm
 ```
 The program below plots the Voigt profile for $\gamma = 0.1$, $\alpha = 0.1$ and compares it with the corresponding Gaussian and Lorentzian profiles. The equations above are implemented in the three functions, $G$, $L$ and $V$ defined in the code below.
 
-```julia
+```@example 1
 using SpecialFunctions: erfcx
+using Plots
+gr() # hide
+nothing # hide
+```
 
+```@example 1
 """ The Faddeeva function """
 w(x) = erfcx(-im*x)
 
@@ -75,9 +80,10 @@ function V(x, alpha, gamma)
     return real(w((x + im * gamma) / sigma / sqrt(2))) / sigma / sqrt(2 * pi)
     return w((x + im * gamma) / (sigma * sqrt(2))) / (sigma * sqrt(2 * pi))
 end
-
+nothing # hide
 ```
-```julia
+
+```@example 1
 alpha, gamma = 0.1, 0.1
 
 xx = LinRange(-0.8, 0.8, 1001)
@@ -86,20 +92,18 @@ plot!(xx, L.(xx, gamma), label="Lorentzian")
 plot!(xx, V.(xx, alpha, gamma), label="Voigt")
 ```
 
-
-```julia
+```@example 1
 alpha, gamma = 0.1, 0.1
 
 xx = LinRange(-0.8, 0.8, 1001)
 plot(xx, G.(xx, alpha), label="Gaussian")
 plot!(xx, L.(xx, gamma), label="Lorentzian")
 plot!(xx, V.(xx, alpha, gamma), label="Voigt")
-
 ```
 
 In the limiting cases of $\sigma=0$ and $\gamma=0$ then $V(x;\sigma,\gamma)$ simplifies to $L(x;\gamma)$ and $G(x;\sigma)$, respectively.
 
-```julia
+```@example 1
 b_list = [.2 .4 .8]
 alpha′, gamma′ = b_list * alpha, (1 .- b_list) * gamma
 
@@ -110,6 +114,7 @@ plot!(xx, V.(xx, alpha′, gamma′), label=["Voigt b=$b" for b in b_list])
 ```
 
 ## Properties
+
 The Voigt profile is normalized:
 ```math
   \int_{-\infty}^\infty V(x;\sigma,\gamma)\,dx = 1,
@@ -123,13 +128,12 @@ since it is a convolution of normalized profiles. The Lorentzian profile has no 
 Since normal distributions and Cauchy distributions are stable distributions, they are each closed under convolution (up to change of scale), and it follows that the Voigt distributions are also closed under convolution.
 
 
-```julia
+```@example 1
 """ Return the Complex Voigt line shape at x with Lorentzian component HWHM gamma
 and Gaussian component HWHM alpha. """
 function V_complex(x, alpha, gamma)
     sigma = alpha / sqrt(2 * log(2))
 
-    return real(w((x + im * gamma) / sigma / sqrt(2))) / sigma / sqrt(2 * pi)
     return w((x + im * gamma) / (sigma * sqrt(2))) / (sigma * sqrt(2 * pi))
 end
 

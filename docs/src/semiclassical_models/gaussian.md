@@ -31,27 +31,27 @@ where $s=\{s_1,\dots,s_n\}$ is the shift vector and the matrix $C$ can be assume
 \varphi(\xi; x_0, \gamma) =  e^{i x_0 \xi} \cdot e^{- \gamma \xi^2}
 ```
 
+```@example 1
+using Plots
+gr() # hide
+nothing # hide
+```
 
-```julia
+```@example 1
 Gaussian(x, μ, σ) = 1 / (σ * sqrt(2π)) * exp(-1/2 * (x - μ)^2 / σ^2)
 
 μ, σ = 6, .5
-
 X = LinRange(0,10,1001)
 plot(X, Gaussian.(X, μ, σ))
-plot!(size=(800,400))
 ```
 
-```julia
+```@example 1
 phi(ξ, x₀, γ) = exp(- im * x₀ * ξ) * exp(-(γ * ξ)^2)
 
 Ξ = LinRange(-2π, 2π, 1001)
 plot(Ξ, phi.(Ξ, μ, σ))
-plot!(size=(800,400))
 ```
 
-```julia
-plot(Ξ, abs.(phi.(Ξ, x₀, γ)))
-plot!(size=(800,400))
+```@example 1
+plot(Ξ, abs.(phi.(Ξ, μ, σ)))
 ```
-

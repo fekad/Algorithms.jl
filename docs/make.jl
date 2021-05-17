@@ -1,7 +1,11 @@
 using Documenter, Algorithms
 
+# https://github.com/JuliaPlots/Plots.jl/issues/3012
+ENV["GKSwstype"] = "nul"
+
 makedocs(
     sitename="Algorithms",
+    doctest = false,
     # repo="https://github.com/fekad/Algorithms.jl/blob/{commit}{path}#L{line}",
     pages = [
         "index.md",

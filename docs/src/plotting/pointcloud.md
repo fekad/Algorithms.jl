@@ -1,4 +1,4 @@
-# Pointcloud
+# Poincloud
 
 ## scaler fields: point cloud
 
@@ -18,7 +18,7 @@ a + b
 
 Suppose we are working with the following plots:
 
-```julia
+```@repl subplots
 using PlotlyJS  # hide
 p1 = Plot(scatter(;y=randn(3)))
 p2 = Plot(histogram(;x=randn(50), nbinsx=4))
@@ -56,10 +56,25 @@ x = range(-π, π, length=1001)
 plot(x, f.(x), color = "red")
 savefig("f-plot.svg"); nothing # hide
 ```
-![](f-plot.svg)
+<!-- ![](f-plot.svg) -->
 
+```julia
+using Plots
+f(x) = sin(2x) + 1
+#direct
+x = range(-π, π, length=1001)
+plot(x, f.(x), color = "red")
+```
 
-```julia 1
+```julia
+using Plots
+f(x) = sin(2x) + 1
+# eval
+x = range(-π, π, length=1001)
+plot(x, f.(x), color = "red")
+```
+
+```julia
 using Plots
 plotlyjs()
 
@@ -71,7 +86,7 @@ p = plot(x, f.(x), color = "red")
 sprint(show, MIME("image/svg+xml"), p)
 ```
 
-```julia julia 1
+```julia
 using Plots
 plotlyjs()
 
