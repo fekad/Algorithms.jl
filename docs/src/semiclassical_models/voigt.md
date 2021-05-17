@@ -1,44 +1,54 @@
-## The Voigt profile
+
+# The Voigt profile
 
 source: [https://en.wikipedia.org/wiki/Voigt_profile](https://en.wikipedia.org/wiki/Voigt_profile)
 
 Without loss of generality, we can consider only centered profiles, which peak at zero. The Voigt profile is then
-$$ V(x;\sigma,\gamma) \equiv \int_{-\infty}^\infty G(x';\sigma)L(x-x';\gamma)\, dx', $$
+```math
+V(x;\sigma,\gamma) \equiv \int_{-\infty}^\infty G(x';\sigma)L(x-x';\gamma)\, dx',
+```
 
 where $x$ is the shift from the line center, $G(x;\sigma)$ is the centered Gaussian profile:
 
-$$ G(x;\sigma) \equiv \frac{e^{-x^2/(2\sigma^2)}}{\sigma \sqrt{2\pi}}, $$
+```math
+G(x;\sigma) \equiv \frac{e^{-x^2/(2\sigma^2)}}{\sigma \sqrt{2\pi}},
+```
 
 and $L(x;\gamma)$ is the centered Lorentzian profile:
 
-$$ L(x;\gamma) \equiv \frac{\gamma}{\pi(x^2+\gamma^2)}. $$
+```math
+L(x;\gamma) \equiv \frac{\gamma}{\pi(x^2+\gamma^2)}.
+```
 
 The defining integral can be evaluated as:
 
-$$ V(x;\sigma,\gamma)=\frac{\operatorname{Re}[w(z)]}{\sigma\sqrt{2 \pi}}, $$
+```math
+V(x;\sigma,\gamma)=\frac{\operatorname{Re}[w(z)]}{\sigma\sqrt{2 \pi}},
+```
 
 where $\operatorname{Re}[w(z)]$ is the real part of the Faddeeva function evaluated for
-$$
+```math
 z=\frac{x+i\gamma}{\sigma\sqrt{2}}.
-$$
+```
 
 
-source: [https://scipython.com/book/chapter-8-scipy/examples/the-voigt-profile/]()
+source: [https://scipython.com/book/chapter-8-scipy/examples/the-voigt-profile/](https://scipython.com/book/chapter-8-scipy/examples/the-voigt-profile/)
 
 The Voigt line profile occurs in the modelling and analysis of radiative transfer in the atmosphere. It is the convolution of a Gaussian profile, $G(x; \sigma)$ and a Lorentzian profile, $ L(x; \gamma)$:
-$$
-\begin{align*}
-V(x; \sigma, \gamma) = \int_{-\infty}^\infty G(x';\sigma)L(x-x';\gamma)\,\mathrm{d}x' \quad\mathrm{where}\\
+```math
+V(x; \sigma, \gamma) = \int_{-\infty}^\infty G(x';\sigma)L(x-x';\gamma)\,\mathrm{d}x'
+```
+where
+```math
 G(x;\sigma) = \frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{x^2}{2\sigma^2}\right) \quad \mathrm{and}\quad L(x;\gamma) = \frac{\gamma/\pi}{x^2 + \gamma^2}.
-\end{align*}
-$$
+```
 
 Here $\gamma$ is the half-width at half-maximum (HWHM) of the Lorentzian profile and $\sigma$ is the standard deviation of the Gaussian profile, related to its HWHM, $\alpha$, by $\alpha = \sigma\sqrt{2\ln 2}$. In terms of frequency, $\nu$, $x = \nu - \nu_0$ where $\nu_0$ is the line centre.
 
 There is no closed form for the Voigt profile, but it is related to the real part of the Faddeeva function, $w(z)$ by
-$$
+```math
 V(x;\sigma,\gamma) = \frac{\renewcommand\Re{\operatorname{Re}}\Re{[w(z)]}}{\sigma\sqrt{2\pi}}, \;\mathrm{where}\;z = \frac{x + i\gamma}{\sigma\sqrt{2}}.
-$$
+```
 The program below plots the Voigt profile for $\gamma = 0.1$, $\alpha = 0.1$ and compares it with the corresponding Gaussian and Lorentzian profiles. The equations above are implemented in the three functions, $G$, $L$ and $V$ defined in the code below.
 
 ```julia
@@ -99,16 +109,16 @@ plot!(xx, L.(xx, gamma), label="Lorentzian")
 plot!(xx, V.(xx, alpha′, gamma′), label=["Voigt b=$b" for b in b_list])
 ```
 
-### Properties
+## Properties
 The Voigt profile is normalized:
-$$
+```math
   \int_{-\infty}^\infty V(x;\sigma,\gamma)\,dx = 1,
-$$
+```
 since it is a convolution of normalized profiles. The Lorentzian profile has no moments (other than the zeroth), and so the moment-generating function for the Cauchy distribution is not defined. It follows that the Voigt profile will not have a moment-generating function either, but the characteristic function for the Cauchy distribution is well defined, as is the characteristic function for the normal distribution.  The characteristic function for the (centered) Voigt profile will then be the product of the two:
 
-$$
+```math
   \varphi_f(t;\sigma,\gamma) = E(e^{ixt}) = e^{-\sigma^2t^2/2 - \gamma |t|}.
-$$
+```
 
 Since normal distributions and Cauchy distributions are stable distributions, they are each closed under convolution (up to change of scale), and it follows that the Voigt distributions are also closed under convolution.
 
@@ -131,21 +141,3 @@ plot(
     layout =(2,1)
 )
 ```
-
-```julia
-```
-
-```julia
-```
-
-```julia
-```
-
-```julia
-```
-
-```julia
-```
-
-
-

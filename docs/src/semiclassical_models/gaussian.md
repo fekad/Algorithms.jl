@@ -1,31 +1,35 @@
-## Gaussian function (Normal distribution)
+# Gaussian function (Normal distribution)
 
 Gaussian functions are often used to represent the probability density function of a normally distributed random variable with expected value $\mu$ and variance $\sigma^2$. In this case, the Gaussian is of the form:
 
-$$ g(x)={\frac {1}{\sigma {\sqrt {2\pi }}}}\exp {\left(-{\frac {1}{2}}{\frac {(x-\mu )^{2}}{\sigma ^{2}}}\right)}.$$
+```math
+g(x)={\frac {1}{\sigma {\sqrt {2\pi }}}}\exp {\left(-{\frac {1}{2}}{\frac {(x-\mu )^{2}}{\sigma ^{2}}}\right)}.
+```
 
-### Multi-dimensional Gaussian function (Multivariate normal distribution)
+
+## Multi-dimensional Gaussian function (Multivariate normal distribution)
 
 In an $n$-dimensional space a Gaussian function can be defined as
-$$
+```math
 f(x) = \exp(-x^TCx) \;,
-$$
+```
 where $x=\{x_1,\dots,x_n\}$ is a column of $n$ coordinates, $C$ is a [[positive-definite matrix|positive-definite]] $n\times n$ matrix, and ${}^T$ denotes [[transpose|matrix transposition]].
 
 The integral of this Gaussian function over the whole $n$-dimensional space is given as
-$$
+```math
 \int_{\mathbb{R}^n} \exp(-x^TCx) \, dx = \sqrt{\frac{\pi^n}{\det C}} \;.
-$$
+```
 It can be easily calculated by diagonalizing the matrix $C$ and changing the integration variables to the eigenvectors of  $C$.
 
 More generally a shifted Gaussian function is defined as
-$$
+```math
 f(x) = \exp(-x^TCx+s^Tx) \;,
-$$
+```
 where $s=\{s_1,\dots,s_n\}$ is the shift vector and the matrix $C$ can be assumed to be symmetric, $C^T=C$, and positive-definite.
 
-
-$$ \varphi(\xi; x_0, \gamma) =  e^{i x_0 \xi} \cdot e^{- \gamma \xi^2}$$
+```math
+\varphi(\xi; x_0, \gamma) =  e^{i x_0 \xi} \cdot e^{- \gamma \xi^2}
+```
 
 
 ```julia

@@ -1,4 +1,4 @@
-# Plotting
+# Pointcloud
 
 ## scaler fields: point cloud
 
@@ -10,7 +10,7 @@ aaaa
 
 ## atomic structures
 
-```@example
+```julia
 a = 1
 b = 2
 a + b
@@ -18,7 +18,7 @@ a + b
 
 Suppose we are working with the following plots:
 
-```@repl subplots
+```julia
 using PlotlyJS  # hide
 p1 = Plot(scatter(;y=randn(3)))
 p2 = Plot(histogram(;x=randn(50), nbinsx=4))
@@ -29,26 +29,26 @@ p4 = Plot([scatter(;x=1:4, y=[0, 2, 3, 5], fill="tozeroy"),
 
 If we wanted to combine `p1` and `p2` as subplots side-by-side, we would do
 
-```@example subplots
+```julia subplots
 [p1 p2]
 ```
 
 If instead we wanted two rows and one column we could
 
-```@example subplots
+```julia subplots
 [p3, p4]
 ```
 
 Finally, we can make a 2x2 grid of subplots:
 
-```@example subplots
+```julia subplots
 [p1 p2
  p3 p4]
 ```
 
 
 
-```@example
+```julia
 using Plots
 f(x) = sin(2x) + 1
 
@@ -59,7 +59,7 @@ savefig("f-plot.svg"); nothing # hide
 ![](f-plot.svg)
 
 
-```@example 1
+```julia 1
 using Plots
 plotlyjs()
 
@@ -71,7 +71,7 @@ p = plot(x, f.(x), color = "red")
 sprint(show, MIME("image/svg+xml"), p)
 ```
 
-```julia @example 1
+```julia julia 1
 using Plots
 plotlyjs()
 
